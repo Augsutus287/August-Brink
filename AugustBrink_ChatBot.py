@@ -1,6 +1,16 @@
-# -*- coding: utf-8 -*-
+ #-*- coding: utf-8 -*-
 import random
 import sys
+import os 
+import datetime
+
+
+def get_date():
+    today = datetime.date.today()
+    return today.strftime("%B %d, %Y")
+
+Actions = {
+    "date": get_date}
 
 # All data samlad i en dictionary
 data = {
@@ -23,14 +33,6 @@ data = {
     "goodbye": {
         "keywords": ["bye", "goodbye", "see you later"],
         "responses": ["Goodbye! Take care!", "See you later! Have a great day!", "Bye! If you ever want to chat again, I'm here!"]
-    },
-    "swear": {
-        "keywords": ["damn", "fuck", "shit", "bitch", "ass", "whore", "pussy", "dick", "fuh"],
-        "responses": ["Please watch your language.", "Let's keep the conversation respectful.", "I understand you're upset, but let's try to use kinder words."]
-    },
-    "six_seven": {
-        "keywords": ["67", "six-seven", "sixty seven"],
-        "responses": ["omg six seven", "67 67 67 67 67", "67 is a great number!"]
     }
     
 }

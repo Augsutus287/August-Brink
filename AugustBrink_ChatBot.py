@@ -1,56 +1,109 @@
  #-*- coding: utf-8 -*-
+  #Importerar nödvändliga bibliotek och moduler.
 import random
 import sys
 import os 
 import datetime
-
+#detta ska bli en funktion som låter chatboten saga vad klockan är eller dagens datum.
+   
+def get_time ():
+        now = datetime.datetime.now()
+        print("Bot:", "the time is", now.strftime("%H:%M"))
 
 def get_date():
-    today = datetime.date.today()
-    return today.strftime("%B %d, %Y")
+        today = datetime.date.today()
+        print("Bot:", "today is", today)
 
-Actions = {
-    "date": get_date}
 
-# All data samlad i en dictionary
+
+
+
+# All data samlad i en dictionary/keywords och svar
 data = {
     "greetings": {
         "keywords": ["hello", "hi", "greetings"],
-        "responses": ["Hello if you want to talk I'm all ears.", "Hi do you want to tell me about your day?"]
+        "responses": [
+            "Hello if you want to talk I'm all ears.",
+            "Hi do you want to tell me about your day?",
+        ],
     },
     "happy": {
         "keywords": ["happy", "glad", "good"],
-        "responses": ["That's great to hear! Anything else on your mind?", "I'm glad you're feeling good! Can you tell me more about it?", "Keep up the positive vibes!"]
+        "responses": [
+            "That's great to hear! Anything else on your mind?",
+            "I'm glad you're feeling good! Can you tell me more about it?",
+            "Keep up the positive vibes!",
+        ],
     },
     "sad": {
         "keywords": ["sad", "down", "unhappy", "unwell"],
-        "responses": ["I'm sorry to hear that. Do you want to talk about it?", "It's okay to feel sad sometimes. I'm here for you.", "If you want to share what's making you feel down, I'm here to listen."]
+        "responses": [
+            "I'm sorry to hear that. Do you want to talk about it?",
+            "It's okay to feel sad sometimes. I'm here for you.",
+            "If you want to share what's making you feel down, I'm here to listen.",
+        ],
     },
     "school": {
         "keywords": ["school", "homework", "class", "teacher"],
-        "responses": ["School can be tricky sometimes. Do you want to talk about what's going on at school?", "Homework can be tough. Do you need to talk about it?", "Teachers can be great or challenging. Do you want to share more about your school experience?"]
+        "responses": [
+            "School can be tricky sometimes. Do you want to talk about what's going on at school?",
+            "Homework can be tough. Do you need to talk about it?",
+            "Teachers can be great or challenging. Do you want to share more about your school experience?",
+        ],
     },
     "goodbye": {
         "keywords": ["bye", "goodbye", "see you later"],
-        "responses": ["Goodbye! Take care!", "See you later! Have a great day!", "Bye! If you ever want to chat again, I'm here!"]
-    }
+        "responses": [
+            "Goodbye! Take care!",
+            "See you later! Have a great day!",
+            "Bye! If you ever want to chat again, I'm here!",
+        ],
+    },
+    "confused": {
+        "keywords": [
+            "confused",
+            "don't understand",
+            "do not understand",
+            "what does that mean",
+            "i don't know",
+            "i dont know",
+            "confusing",
+        ],
+        "responses": [
+            "I can help clarify! Can you tell me more about what's confusing you?",
+            "It's okay to be confused sometimes. What part is giving you trouble?",
+            "If you're not sure about something, feel free to ask me for more information!",
+        ],
+    },
+    "football": {
+        "keywords": ["football", "soccer",],
+        "responses": [
+            "Football is great and trust me you are going to be the next messi if you keep practicing!",
+            "Football is a good source for exercise and its lots of fun",
+            "I wish i could watch football but unfortunately i dont have eyes :(",
+        ],
+    },
     
 }
 
+# Svar som används om boten inte hittar några keywords i användarens text.
 fallback_responses = [
     "I'm not sure I understand. Can you tell me more?",
     "That's interesting! Can you explain it a bit more?",
     "I see. Can you elaborate on that?",
-    "sorry i quit you suck at this"
+    "sorry i quit you suck at this",
 ]
 
-
+#Funktion som använder användarens input för att hitta svar baserat på keywords i data dicionaryn.
 def find_response(message: str) -> str:
     if not message:
         return random.choice(fallback_responses)
 
     msg = message.lower()
 
+   
+
+    # Fall back to category keyword matching
     for category in data.values():
         for keyword in category["keywords"]:
             if keyword in msg:
@@ -58,7 +111,7 @@ def find_response(message: str) -> str:
 
     return random.choice(fallback_responses)
 
-
+# 
 def run_bot(bot_name="Fi"):
     print("=" * 50)
     print(f"Hello! My name is {bot_name}. Im the spirit of the master sword how can i help you?")
